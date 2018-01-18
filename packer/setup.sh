@@ -3,7 +3,7 @@ set -e
 set -o pipefail
 create_cp_user() {
   if ! id -u cp; then
-    sudo useradd -m -s /bin/bash cp
+    useradd -m -s /bin/bash cp
   fi
 }
 
@@ -20,8 +20,10 @@ start_supervisor_service() {
 }
 
 setup_cp_code() {
+  sudo chgrp -R cp  /usr/local
+  sudo chmod -R g+rw /usr/local
   rm -rf /home/cp/app
-  sudo mkdir -p /home/cp/app
+  mkdir -p /home/cp/app
   cd /home/cp/app && git clone https://username:pass@github.com/FlevianK/cp2-document-management-system.git
   sudo chown -R cp:cp /home/cp/app/cp2-document-management-system
   
