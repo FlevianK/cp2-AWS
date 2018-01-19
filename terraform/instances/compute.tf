@@ -1,8 +1,12 @@
-resource "aws_instance" "cp2-instance" {
-  ami = "${var.ami}"
-  instance_type = "${var.cp2_instance_type}"
+resource "aws_instance" "cp2-app" {
+  ami           = "${var.ami}"
+  instance_type = "${var.cp2-instance-type}"
+  associate_public_ip_address = "true"
+  subnet_id = "${aws_subnet.PublicAZA.id}"
+  vpc_security_group_ids = ["${aws_security_group.FrontEnd.id}"]
+  key_name = "${var.key_name}"
   tags {
-    Name = "HelloWorld"
+        Name = "cp2-app"
   }
-  security_groups = [ "${aws_security_group.my_security_group.id}" ]
+  user_data =  "/home/vof/start_cp.sh"
 }

@@ -5,7 +5,7 @@ variable "ami" {
 
 variable "cp2_instance_type" {
   type    = "string"
-  default = ""
+  default = "t2.micro"
 }
 
 variable “access_key” {}
