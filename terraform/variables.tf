@@ -1,18 +1,25 @@
-variable "ami" {
-  type    = "string"
-  default = ""
-}
-
 variable "cp2_instance_type" {
-  type    = "string"
-  default = "t2.micro"
+  type = "string"
 }
-
-variable “access_key” {}
-
-variable “secret_key” {}
-
 variable “region” {
   type    = "string"
-  default = “us-east-1”
+}
+variable "cp2-ami" {
+  type = "string"
+}
+variable "credentialsfile" {
+  type = "string"
+}
+variable "vpc-fullcidr" {
+  type = "string"
+}
+variable "subnet-public-nat-gw-CIDR" {
+  type = "string"
+}
+variable "subnet-private-nat-gw-CIDR" {
+  type = "string"
+}
+variable "key_name" {
+  type = "string"
+  description = "the ssh key to use in the EC2 machines"
 }
