@@ -42,9 +42,9 @@ resource "aws_route_table" "cp2-public" {
 resource "aws_eip" "cp2-Nat" {
     vpc      = true
 }
-resource "aws_nat_gateway" "cp2-nat-gw" {
+resource "aws_nat_gateway" "cp2-public-nat-gw" {
     allocation_id = "${aws_eip.cp2-Nat.id}"
-    subnet_id = "${aws_subnet.cp2-nat-gw.id}"
+    subnet_id = "${aws_subnet.cp2-public-nat-gw.id}"
     depends_on = ["aws_internet_gateway.cp2-gw"]
 }
 resource "aws_route_table" "cp2-private" {
@@ -54,6 +54,6 @@ resource "aws_route_table" "cp2-private" {
   }
   route {
         cidr_block = "0.0.0.0/0"
-        nat_gateway_id = "${aws_nat_gateway.cp2-nat-gw.id}"
+        nat_gateway_id = "${aws_nat_gateway.cp2-public-nat-gw.id}"
   }
 }
